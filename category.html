@@ -1,0 +1,29 @@
+---
+layout: page
+title: "Category"
+permalink: /category/
+---
+
+{% capture categories %}
+{% for category in site.categories %}
+{{ category[0] }}
+{% endfor %}
+{% endcapture %}
+{% assign sortedcategories = categories | split:' ' | sort %}
+
+{% for tag in sortedcategories %}
+<h2 id="{{ tag }}">{{ tag }}</h3>
+  <ul class="posts-list">
+    {% for post in site.categories[tag] %}
+    <li>
+      <strong>
+        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </strong>
+      <span class="post-date">- {{ post.date | date: "%B %-d, %Y" }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% if forloop.last == false %}
+  <hr>{% endif %}
+  {% endfor %}
+  <br>

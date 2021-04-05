@@ -1,0 +1,16 @@
+---
+layout: page
+---
+<!-- <h1>Posts in "<em>{{ page.name }}</em>"</h1> -->
+<ul class="post-list">
+    {% for post in site.posts %}
+    {% if post.tags contains page.name %}
+    <li class="post-item">{% include post_item.html %}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+<div class="go-tags">
+    <a href="{{ site.bsaeurl }}/tags">태그 목록으로</a>
+</div>
+<br>

@@ -1,0 +1,53 @@
+# Site settings
+title: Jester's Dev Blog
+description: survive as a developer
+cover: "/assets/cover.jpg"
+logo: "/assets/logo.png"
+
+# Author
+name: ByungJoon Lee
+email: jesterz91@naver.com
+
+collections:
+  tags:
+    output: true
+    permalink: /tags/:path/
+
+defaults:
+  - scope:
+      path: ''
+      type: tags
+    values:
+      layout: tag
+
+# Gem settings
+gems:
+  - jekyll-sitemap
+  - jekyll-paginate
+
+plugins: [jekyll-paginate]
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+paginate: 5
+paginate_path: "/page:num/"
+highlightjs_theme: "monokai-sublime"
+
+# Disqus comments
+disqus_shortname: dev-hunter
+
+# Google analytics
+ga_tracking_id: "UA-138789625-1"
+
+social:
+  - name: GitHub
+    icon: github
+    username: jesterz91
+    url: https://github.com/jesterz91
+    desc: My GitHub
+# - name: LinkedIn
+#   icon: linkedin
+#   username: jesterz91
+#   url: https://www.linkedin.com/pub/
+#   desc: Connect with me on LinkedIn

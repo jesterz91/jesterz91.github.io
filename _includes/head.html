@@ -1,0 +1,45 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  {% if site.name %}
+  <meta name="author" content="{{ site.name }}">
+  <meta name="copyright" content="&copy; {{ site.name }} {{ site.time | date: '%Y' }}">
+  {% endif %}
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 50 }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:image" content="{{ "/assets/logo/og.png" | prepend: site.baseurl | prepend: site.url }}">
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/{{ site.highlightjs_theme }}.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{ "/assets/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+  
+  <!-- Pagination -->
+  <link rel="stylesheet" href="{{ "/assets/pagination.css" | prepend: site.baseurl }}">
+  
+  <!-- Search -->
+  <link rel="stylesheet" href="{{ "/css/search.css" | prepend: site.baseurl }}">
+
+  <!-- Tag -->
+  <link rel="stylesheet" href="{{ "/css/tag.css" | prepend: site.baseurl }}">
+  
+  <!-- Naver Web Master meta tag -->
+  <meta name="naver-site-verification" content="99591a0cfbcf2ab8bbed528abe3cdb4af0effb1e"/>
+</head>
