@@ -32,7 +32,7 @@ markdown: kramdown
 permalink: pretty
 paginate: 5
 paginate_path: "/page:num/"
-highlightjs_theme: "monokai-sublime"
+highlightjs_theme: "dracula"
 
 # Disqus comments
 disqus_shortname: dev-hunter
