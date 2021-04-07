@@ -55,7 +55,7 @@ class ViewController: UIViewController {
             self.containerView.leadingAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.leadingAnchor),
             self.containerView.trailingAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.trailingAnchor),
             self.containerView.bottomAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.bottomAnchor),
-            self.containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+            self.containerView.widthAnchor.constraint(equalTo: self.scrollView.frameLayoutGuide.widthAnchor),
             
             self.stackView.topAnchor.constraint(equalTo: self.containerView.topAnchor),
             self.stackView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
