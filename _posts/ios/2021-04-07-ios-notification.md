@@ -85,25 +85,23 @@ private func sendNotification(
     UNUserNotificationCenter.current().getNotificationSettings { (settings) in
         
         guard settings.authorizationStatus == UNAuthorizationStatus.authorized else { return }
-        
-        DispatchQueue.main.async {
-            // 알림 콘텐츠 객체
-            let content = UNMutableNotificationContent()
-            content.title = title
-            content.subtitle = subtitle
-            content.body = body
-            content.userInfo = data
-            content.badge = 1
-            content.sound = UNNotificationSound.default
-            
-            // 알림 발송조건 객체
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
-            
-            // 알림 요청 객체
-            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        }
+
+        // 알림 콘텐츠 객체
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = subtitle
+        content.body = body
+        content.userInfo = data
+        content.badge = 1
+        content.sound = UNNotificationSound.default
+
+        // 알림 발송조건 객체
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+
+        // 알림 요청 객체
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }
 {% endhighlight %}
@@ -112,7 +110,7 @@ private func sendNotification(
 
 #### 4. Badge 초기화
 
-앱 포그라운드 진입시 뱃지 초기화
+애플리케이션이 백그라운드에서 포그라운드로 진입할 경우 뱃지 카운트를 초기화할 수 있습니다.
 
 {% highlight swift %}
 import UIKit
