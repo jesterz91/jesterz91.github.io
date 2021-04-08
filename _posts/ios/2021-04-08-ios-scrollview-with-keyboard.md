@@ -66,14 +66,17 @@ override func viewWillDisappear(_ animated: Bool) {
 @objc private func keyboardWillShow(_ notification: Notification) {
     guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
-    let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height, right: 0)
-    self.scrollView.contentInset = contentInsets
-    self.scrollView.scrollIndicatorInsets = contentInsets
+    let insets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height, right: 0)
+    setScrollViewContentInset(contentInset: insets)
 }
 
 @objc private func keyboardWillHide(_ notification: Notification) {
-    let contentInsets = UIEdgeInsets.zero
-    self.scrollView.contentInset = contentInsets
-    self.scrollView.scrollIndicatorInsets = contentInsets
+
+    setScrollViewContentInset(contentInset: .zero)
+}
+
+private func setScrollViewContentInset(contentInset: UIEdgeInsets) {
+    self.scrollView.contentInset = contentInset
+    self.scrollView.scrollIndicatorInsets = contentInset
 }
 {% endhighlight %}
