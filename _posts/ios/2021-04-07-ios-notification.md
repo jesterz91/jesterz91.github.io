@@ -3,7 +3,7 @@ layout: post
 title:  "[iOS] UserNotification 프레임워크를 이용한 알림구현"
 date:   2021-04-07 00:00:00
 categories: iOS
-tags: iOS Swift
+tags: iOS Swift Notification
 ---
 
 ![ios]({{ site.url }}/assets/logo/ios.png)

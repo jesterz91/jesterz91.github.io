@@ -19,7 +19,7 @@ tags: iOS Swift
 {% highlight swift %}
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let view: UIScrollView = UIScrollView()
