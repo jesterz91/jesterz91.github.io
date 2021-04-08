@@ -15,7 +15,7 @@ UserNotificationCenter를 사용하여 메시지를 전달할 수 있습니다.
 
 #### 1. 알림허용 요청
 
-로컬/푸시 알림을 사용하기 위해서는 알림 설정 환경을 정의하고, 사용자에게 승인을 받아야 합니다.
+로컬/푸시 알림을 사용하기 위해서는 유저에게 승인을 받아야 합니다.
 
 {% highlight swift %}
 import UIKit
@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 경고창, 배지, 사운드를 사용하는 알림 환경 정보 생성, 동의 여부창 실행
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.delegate = self
-        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (didAllow, error) in
-            didAllow ? print("알림허용") : print("알림거부")
+        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            granted ? print("알림허용") : print("알림거부")
         }
         return true
     }
@@ -48,7 +48,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        completionHandler([.list, .badge, .sound])
+        completionHandler([.list, .badge, .sound, .banner])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -57,10 +57,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         switch identifier {
         case "id":
-            print(userInfo["key"]!)
+            dump(userInfo)
         default:
             break
         }
+        completionHandler()
     }
 }
 {% endhighlight %}
@@ -73,18 +74,25 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 UNUserNotificationCenter에 알림요청 객체인 UNNotificationRequest를 추가해주면 됩니다.
 
 {% highlight swift %}
-private func sendNotification(identifier: String, interval: TimeInterval) {
+private func sendNotification(
+    identifier: String,
+    title: String,
+    subtitle: String,
+    body: String,
+    data: [AnyHashable: Any],
+    interval: TimeInterval
+) {
     UNUserNotificationCenter.current().getNotificationSettings { (settings) in
         
         guard settings.authorizationStatus == UNAuthorizationStatus.authorized else { return }
         
         DispatchQueue.main.async {
-
             // 알림 콘텐츠 객체
             let content = UNMutableNotificationContent()
-            content.title = "알림 타이틀"
-            content.body = "알림 내용"
-            content.userInfo = ["key":"value"]
+            content.title = title
+            content.subtitle = subtitle
+            content.body = body
+            content.userInfo = data
             content.badge = 1
             content.sound = UNNotificationSound.default
             
@@ -96,6 +104,23 @@ private func sendNotification(identifier: String, interval: TimeInterval) {
             
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
+    }
+}
+{% endhighlight %}
+
+***
+
+#### 4. Badge 초기화
+
+앱 포그라운드 진입시 뱃지 초기화
+
+{% highlight swift %}
+import UIKit
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 }
 {% endhighlight %}
