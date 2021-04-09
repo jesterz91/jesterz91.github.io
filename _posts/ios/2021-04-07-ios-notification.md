@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             granted ? print("알림허용") : print("알림거부")
         }
+
         return true
     }
 }
@@ -46,11 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 {% highlight swift %}
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
+    // 애플리케이션이 foreground에 있는 경우 호출
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         completionHandler([.list, .badge, .sound, .banner])
     }
     
+    // 알림을 탭하여 응답하면 호출
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let identifier = response.notification.request.identifier
         let userInfo = response.notification.request.content.userInfo
@@ -61,6 +64,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         default:
             break
         }
+
         completionHandler()
     }
 }
