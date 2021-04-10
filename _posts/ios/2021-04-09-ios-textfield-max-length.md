@@ -17,9 +17,9 @@ UITextFieldDelegate 프로토콜을 채택하여 글자수를 제한할 수 있�
 
 TextField에 delegate를 설정합니다.
 
-{% highlight swift %}
+```swift
 textField.delegate = self // ViewController
-{% endhighlight %}
+```
 
 ***
 
@@ -27,7 +27,7 @@ textField.delegate = self // ViewController
 
 UITextFieldDelegate 의 메서드를 구현하여 최대글자수 이상 입력을 막는 코드를 추가합니다.
 
-{% highlight swift %}
+```swift
 extension ViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -41,5 +41,4 @@ extension ViewController: UITextFieldDelegate {
         return newText.count <= maxLength
     }
 }
-
-{% endhighlight %}
+```

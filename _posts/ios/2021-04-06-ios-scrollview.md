@@ -16,7 +16,7 @@ tags: iOS Swift
 
 #### 1. ScrollView 설정
 
-{% highlight swift %}
+```swift
 import UIKit
 
 final class ViewController: UIViewController {
@@ -64,7 +64,7 @@ final class ViewController: UIViewController {
         ])
     }
 }
-{% endhighlight %}
+```
 
 ***
 
@@ -72,7 +72,7 @@ final class ViewController: UIViewController {
 
 stackView에 Content View를 추가하면 스크롤이 동작하는 것을 확인할 수 있습니다.
 
-{% highlight swift %}
+```swift
 private func addContentView() {
     let label = UILabel()
     label.numberOfLines = .zero
@@ -98,4 +98,4 @@ private func getLargeText() -> String {
         There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
         """
 }
-{% endhighlight %}
+```

@@ -17,11 +17,11 @@ tags: iOS Swift NotificationCenter
 
 스크롤뷰가 드래그 될 경우 키보드가 사라질 수 있도록 코드를 추가 합니다.
 
-{% highlight swift %}
+```swift
 private func setKeyboardDismissMode() {
     self.scrollView.keyboardDismissMode = .onDrag
 }
-{% endhighlight %}
+```
 
 ***
 
@@ -30,7 +30,7 @@ private func setKeyboardDismissMode() {
 `keyboardWillShowNotification`, `keyboardWillHideNotification` 알림을 받을수 있도록 
 Observer를 등록/해제 하는 코드를 추가해 줍니다.
 
-{% highlight swift %}
+```swift
 override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -54,7 +54,7 @@ override func viewWillDisappear(_ animated: Bool) {
 
     NotificationCenter.default.removeObserver(self)
 }
-{% endhighlight %}
+```
 
 ***
 
@@ -63,7 +63,7 @@ override func viewWillDisappear(_ animated: Bool) {
 키보드 이벤트에 대한 알림을 받아 스크롤뷰의 contentInset 설정을 해주면,
 키보드에 의해 뷰가 가려지는 현상을 방지할 수 있습니다.
 
-{% highlight swift %}
+```swift
 @objc private func keyboardWillShow(_ notification: Notification) {
     guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
@@ -80,4 +80,4 @@ private func setScrollViewContentInset(contentInset: UIEdgeInsets) {
     self.scrollView.contentInset = contentInset
     self.scrollView.scrollIndicatorInsets = contentInset
 }
-{% endhighlight %}
+```

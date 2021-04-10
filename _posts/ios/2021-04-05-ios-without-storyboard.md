@@ -33,7 +33,7 @@ Info.plist에서 Storyboard Name 제거
 ***
 
 #### 4. SceneDelegate
-{% highlight swift %}
+```swift
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -48,5 +48,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
 }
-
-{% endhighlight %}
+```

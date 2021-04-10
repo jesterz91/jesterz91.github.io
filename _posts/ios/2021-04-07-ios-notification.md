@@ -17,7 +17,7 @@ UserNotificationCenter를 사용하여 메시지를 전달할 수 있습니다.
 
 로컬/푸시 알림을 사용하기 위해서는 유저에게 승인을 받아야 합니다.
 
-{% highlight swift %}
+```swift
 import UIKit
 import UserNotifications
 
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
-{% endhighlight %}
+```
 ***
 
 #### 2. UNUserNotificationCenterDelegate 프로토콜 채택
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 받은 알림을 처리하기위해 UNUserNotificationCenterDelegate 프로토콜을 채택하여
 알림 처리를 위한 메서드를 구현해 줍니다.
 
-{% highlight swift %}
+```swift
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
     // 애플리케이션이 foreground에 있는 경우 호출
@@ -68,7 +68,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler()
     }
 }
-{% endhighlight %}
+```
 
 ***
 
@@ -77,7 +77,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 알림을 보내기 위해서는
 UNUserNotificationCenter에 알림요청 객체인 UNNotificationRequest를 추가해주면 됩니다.
 
-{% highlight swift %}
+```swift
 private func sendNotification(
     identifier: String,
     title: String,
@@ -108,7 +108,7 @@ private func sendNotification(
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }
-{% endhighlight %}
+```
 
 ***
 
@@ -116,7 +116,7 @@ private func sendNotification(
 
 애플리케이션이 백그라운드에서 포그라운드로 진입할 경우 뱃지 카운트를 초기화할 수 있습니다.
 
-{% highlight swift %}
+```swift
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -125,4 +125,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
 }
-{% endhighlight %}
+```
