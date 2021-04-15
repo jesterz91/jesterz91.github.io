@@ -56,12 +56,11 @@ class MainActivity : AppCompatActivity() {
     ...
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
-        view.setOnSafeClickListener {
+        view.setOnSafeClickListener { view ->
             // TODO 
         }
     }
 }
-
 ```
 
 ```kotlin
@@ -86,11 +85,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 [![Xcode]({{ site.url }}/assets/reactivex/throttle_first.png)]({{ site.url }}/assets/reactivex/throttle_first.png){: data-lightbox="imgs" }
 
-
 `RxJava`와 `RxBinding`을 사용하고 있는 경우, 
 `clicks`, `throttleFirst` 오퍼레이터를 사용하여 중복클릭을 방지할 수 있습니다.
-
-***
 
 #### 확장함수 정의
 
@@ -100,8 +96,6 @@ fun View.safeClicks(): Observable<Unit> {
                    .observeOn(AndroidSchedulers.mainThread())
 }
 ```
-
-***
 
 #### 확장함수 사용
 
