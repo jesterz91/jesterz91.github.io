@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "[Android] 키보드 보이기/숨기기 "
+title:  "[Android] 키보드 보이기/숨기기"
 date:   2021-04-15 00:00:00
 categories: Android
 tags: Android Kotlin
 ---
 
-![ios]({{ site.url }}/assets/logo/android.png)
+![android]({{ site.url }}/assets/logo/android.png)
 
 프로그래밍 방식으로 키보드를 노출하거나 감추고싶을경우 확장함수를 정의하여 사용할 수 있습니다.
 

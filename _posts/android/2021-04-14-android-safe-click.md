@@ -6,7 +6,7 @@ categories: Android
 tags: Android Kotlin RxJava RxBinding
 ---
 
-![ios]({{ site.url }}/assets/logo/android.png)
+![android]({{ site.url }}/assets/logo/android.png)
 
 뷰를 연속으로 클릭하여 발생하는 중복클릭 현상을 방지하기 위해서는 `View.OnClickListener` 를 확장하여 사용하거나,
 `RxJava`, `RxBinding` 의 오퍼레이터를 활용하는 방법이 있습니다.
