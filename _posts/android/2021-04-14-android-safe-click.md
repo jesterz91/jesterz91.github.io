@@ -14,24 +14,30 @@ tags: Android Kotlin RxJava RxBinding
 ***
 ### 1. View.OnClickListener 확장
 
-#### OnSafeClickListener 정의
+#### OnSingleClickListener 정의
 
 ```kotlin
-class OnSafeClickListener(private val onSafeClick: (View) -> Unit) : View.OnClickListener {
+class OnSingleClickListener(private val onSingleClick: (View) -> Unit) : View.OnClickListener {
+
+    private var isClickable: Boolean = true
 
     override fun onClick(view: View?) {
         view ?: return
 
-        if (view.isClickable) {
-            onSafeClick(view)
+        if (isClickable) {
+            onSingleClick(view)
 
-            view.isClickable = false
+            isClickable = false
 
-            // 0.5초간 중복클릭 방지
-            view.postDelayed(500L) {
-                view.isClickable = true
+            /* 중복클릭 방지 */
+            view.postDelayed(INTERVAL) {
+                isClickable = true
             }
         }
+    }
+
+    companion object {
+        const val INTERVAL = 500L
     }
 }
 ```
@@ -40,12 +46,12 @@ class OnSafeClickListener(private val onSafeClick: (View) -> Unit) : View.OnClic
 #### 확장함수 정의
 
 ```kotlin
-fun View.setOnSafeClickListener(onClick: (View) -> Unit) {
-    setOnSafeClickListener(View.OnClickListener(onClick))
+fun View.setOnSingleClickListener(onClick: (View) -> Unit) {
+    setOnSingleClickListener(View.OnClickListener(onClick))
 }
 
-fun View.setOnSafeClickListener(listener: View.OnClickListener) {
-    setOnClickListener(OnSafeClickListener(listener::onClick))
+fun View.setOnSingleClickListener(listener: View.OnClickListener) {
+    setOnClickListener(OnSingleClickListener(listener::onClick))
 }
 ```
 
@@ -56,7 +62,7 @@ class MainActivity : AppCompatActivity() {
     ...
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
-        view.setOnSafeClickListener { view ->
+        view.setOnSingleClickListener { view ->
             // TODO 
         }
     }
@@ -68,8 +74,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     ...
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
-        view1.setOnSafeClickListener(this)
-        view2.setOnSafeClickListener(this)
+        view1.setOnSingleClickListener(this)
+        view2.setOnSingleClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -91,7 +97,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 #### 확장함수 정의
 
 ```kotlin
-fun View.safeClicks(): Observable<Unit> {
+fun View.singleClicks(): Observable<Unit> {
     return clicks().throttleFirst(500L, TimeUnit.MILLISECONDS) // 0.5초간 중복클릭 방지
                    .observeOn(AndroidSchedulers.mainThread())
 }
@@ -104,7 +110,7 @@ class MainActivity : AppCompatActivity() {
     ...
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
-        view.safeClicks()
+        view.singleClicks()
             .subscribe {/* TODO */}
             .addTo(compositeDisposable)
     }
