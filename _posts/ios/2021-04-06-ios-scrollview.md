@@ -20,47 +20,44 @@ tags: iOS Swift
 import UIKit
 
 final class ViewController: UIViewController {
-    
-    private lazy var scrollView: UIScrollView = {
+
+    private let scrollView: UIScrollView = {
         let view: UIScrollView = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    private lazy var containerView: UIView = {
-        let view: UIView = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+
+    private let contentsView: UIStackView = {
+        let view: UIStackView = UIStackView()
         view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
+        makeConstraint()
+    }
+
+    private func configure() {
+        self.view.backgroundColor = .white
         self.view.addSubview(scrollView)
-        self.scrollView.addSubview(containerView)
-        self.containerView.addSubview(stackView)
-        
+        self.scrollView.addSubview(contentsView)
+    }
+
+    private func makeConstraint() {
         NSLayoutConstraint.activate([
             self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             self.scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
-            self.containerView.topAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.topAnchor),
-            self.containerView.leadingAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.leadingAnchor),
-            self.containerView.trailingAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.trailingAnchor),
-            self.containerView.bottomAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.bottomAnchor),
-            self.containerView.widthAnchor.constraint(equalTo: self.scrollView.frameLayoutGuide.widthAnchor),
-            
-            self.stackView.topAnchor.constraint(equalTo: self.containerView.topAnchor),
-            self.stackView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
-            self.stackView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
-            self.stackView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor)
+            self.contentsView.topAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.topAnchor),
+            self.contentsView.leadingAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.leadingAnchor),
+            self.contentsView.trailingAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.trailingAnchor),
+            self.contentsView.bottomAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.bottomAnchor),
+            self.contentsView.widthAnchor.constraint(equalTo: self.scrollView.frameLayoutGuide.widthAnchor),
         ])
     }
 }
@@ -70,14 +67,14 @@ final class ViewController: UIViewController {
 
 #### 2. Content View 추가
 
-stackView에 Content View를 추가하면 스크롤이 동작하는 것을 확인할 수 있습니다.
+contentsView에 View를 추가하면 스크롤이 동작하는 것을 확인할 수 있습니다.
 
 ```swift
 private func addContentView() {
     let label = UILabel()
     label.numberOfLines = .zero
     label.text = getLargeText()
-    self.stackView.addArrangedSubview(label)
+    self.contentsView.addArrangedSubview(label)
 }
 
 private func getLargeText() -> String {
