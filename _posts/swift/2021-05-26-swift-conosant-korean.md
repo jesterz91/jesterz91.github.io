@@ -15,9 +15,9 @@ tags: Swift
 
 ```swift
 func getInitialConsonant(text: String) -> String? {
-    guard let fisrtChar = text.unicodeScalars.first?.value, 0xAC00...0xD7A3 ~= fisrtChar else { return nil }
+    guard let firstChar = text.unicodeScalars.first?.value, 0xAC00...0xD7A3 ~= firstChar else { return nil }
 
-    let value = ((fisrtChar - 0xAC00) / 28 ) / 21
+    let value = ((firstChar - 0xAC00) / 28 ) / 21
 
     return String(format:"%C", value + 0x1100)
 }
@@ -26,9 +26,9 @@ func getInitialConsonant(text: String) -> String? {
 #### 중성
 ```swift
 func getMiddleConsonant(text: String) -> String? {
-    guard let fisrtChar = text.unicodeScalars.first?.value, 0xAC00...0xD7A3 ~= fisrtChar else { return nil }
+    guard let firstChar = text.unicodeScalars.first?.value, 0xAC00...0xD7A3 ~= firstChar else { return nil }
 
-    let value = ((fisrtChar - 0xAC00) / 28) % 21
+    let value = ((firstChar - 0xAC00) / 28) % 21
 
     return String(format:"%C", value + 0x1161)
 }
@@ -37,9 +37,9 @@ func getMiddleConsonant(text: String) -> String? {
 #### 종성
 ```swift
 func getFinalConsonant(text: String) -> String? {
-    guard let fisrtChar = text.unicodeScalars.first?.value, 0xAC00...0xD7A3 ~= fisrtChar else { return nil }
+    guard let firstChar = text.unicodeScalars.first?.value, 0xAC00...0xD7A3 ~= firstChar else { return nil }
 
-    let value = (fisrtChar - 0xAC00) % 28
+    let value = (firstChar - 0xAC00) % 28
 
     guard value > 0 else { return nil }
 
