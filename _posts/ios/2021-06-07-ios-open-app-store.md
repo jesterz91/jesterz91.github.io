@@ -20,3 +20,15 @@ if UIApplication.shared.canOpenURL(url) {
     UIApplication.shared.open(url, options: [:], completionHandler: nil)
 }
 ```
+
+#### Store Kit
+
+
+```swift
+import StoreKit
+
+let appStoreAppID = "1111111111"
+let sotreViewController = SKStoreProductViewController()
+sotreViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier : appStoreAppID])
+present(sotreViewController, animated: true)
+```
