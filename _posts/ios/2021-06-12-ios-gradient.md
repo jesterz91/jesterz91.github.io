@@ -63,3 +63,22 @@ extension UIView {
     }
 }
 ```
+#### TableViewCell(CollectionViewCell)에 적용
+
+```swift
+class MyCell: UITableViewCell {
+    let view = UIView()
+    let gradientLayer = CAGradientLayer()
+
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: self.layer)
+
+        let colors: [UIColor] = [.red, .green, .blue]
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = colors.map(\.cgColor)
+
+        view.backgroundColor = .clear
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+}
+```
