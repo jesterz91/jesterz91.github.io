@@ -8,20 +8,20 @@ tags: iOS Swift
 
 ![ios]({{ site.url }}/assets/logo/ios.png)
 
-#### UIImage Extension
+#### UIColor Extension
 
 ```swift
-extension UIImage {
+extension UIColor {
 
-    static func from(color: UIColor) -> UIImage {
+    var asImage: UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        context.setFillColor(color.cgColor)
-        context.fill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
+        let renderer = UIGraphicsImageRenderer(size: rect.size)
+        let image = renderer.image { ctx in
+            self.setFill()
+            ctx.fill(rect)
+        }
+        return image
     }
 }
+
 ```
