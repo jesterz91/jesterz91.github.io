@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[iOS] 이전 뷰 컨트롤러 얻기"
-date: 2021-08-25 00:00:00
+date: 2021-09-01 00:00:00
 categories: iOS
 tags: iOS Swift
 ---
