@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "[iOS] 버튼의 배경색을 state 별로 지정하기"
-date:   2021-04-13 00:00:00
+title: "[iOS] 버튼의 배경색을 state 별로 지정하기"
+date: 2021-04-13 00:00:00
 categories: iOS
 tags: iOS Swift
 ---
@@ -10,38 +10,36 @@ tags: iOS Swift
 
 버튼의 배경색을 State 별로 지정하고 싶은 경우 extension을 정의하여 사용할 수 있습니다.
 
-***
+---
 
-#### 버튼 extension 정의
+#### UIImage Extension
 
 ```swift
-extension UIButton {
+extension UIImage {
 
-    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
-        UIGraphicsBeginImageContext(CGSize(width: 1.0, height: 1.0))
-
-        guard let context = UIGraphicsGetCurrentContext() else { return }
+    static func from(color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()!
         context.setFillColor(color.cgColor)
-        context.fill(CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0))
-
-        let backgroundImage = UIGraphicsGetImageFromCurrentImageContext()
+        context.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
-        self.setBackgroundImage(backgroundImage, for: state)
+        return image!
     }
 }
 ```
 
-***
+---
 
 #### 버튼 extension 사용
 
 ```swift
-button.setBackgroundColor(.systemRed, for: .normal)
-button.setBackgroundColor(.systemBlue, for: .disabled)
+button.setBackgroundImage(.from(color: .systemRed), for: .normal)
+button.setBackgroundImage(.from(color: .systemBlue), for: .disabled)
 ```
 
-***
+---
 
 출처
 
